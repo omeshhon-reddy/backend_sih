@@ -22,3 +22,4 @@ class ReportResponse(ReportCreate):
     id: UUID
     created_at: datetime
     updated_at: datetime
+    image_url: str | None = None

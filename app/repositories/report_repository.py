@@ -35,6 +35,17 @@ class ReportRepository:
             select(Report).where(Report.id == report_id)
         )
 
+    def update(self, report: Report) -> Report:
+        try:
+            self.db.add(report)
+            self.db.commit()
+            self.db.refresh(report)
+            return report
+
+        except Exception:
+            self.db.rollback()
+            raise
+
     def list(self, offset: int, limit: int) -> list[Report]:
         return list(
             self.db.scalars(

@@ -1,3 +1,4 @@
+from fastapi.staticfiles import StaticFiles
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -27,6 +28,12 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+app.mount(
+    "/uploads",
+    StaticFiles(directory="uploads"),
+    name="uploads",
+)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.cors_origin_list,
@@ -42,3 +49,4 @@ app.include_router(risk.router)
 app.include_router(gis.router)
 app.include_router(alerts.router)
 app.include_router(ws.router)
+

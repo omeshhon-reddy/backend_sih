@@ -64,3 +64,8 @@ class Report(Base):
         back_populates="report",
         cascade="all, delete-orphan"
     )
+
+    image_url: Mapped[str | None] = mapped_column(
+        String(500),
+        nullable=True
+    )
